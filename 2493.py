@@ -5,11 +5,17 @@ n = int(sys.stdin.readline())
 tower = list(map(int, sys.stdin.readline().split()))
 
 stack = []
-result = [0] * n
+result = []
 
-for i in range(n-1):
-    stack.append(n-1-i)
-    while tower and tower[stack[-1]] < tower[-2-i]:
-        result[stack.pop()] = stack[-1]
-        
+for i in range(n):
+    while stack:
+        if stack[-1][1] < tower[i]:
+            stack.pop()
+        else:
+            result.append(stack[-1][0] + 1)
+            break
+    if not stack:
+        result.append(0)
+    stack.append([i, tower[i]])
+            
 print(*result)
