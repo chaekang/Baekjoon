@@ -2,14 +2,19 @@
 
 import sys
 
-string = list(map(str, sys.stdin.readline().split()))
+string = sys.stdin.readline().strip()
 
-bomb = list(map(str, sys.stdin.readline().split()))
+bomb = sys.stdin.readline().strip()
 
-result = []
+stack = []
 
-for ch in string:
-    if ch not in bomb:
-        result.append(ch)
-        
-print(result)
+for i in range(len(string)):
+    stack.append(string[i])
+    if ''.join(stack[-len(bomb):]) == bomb:
+        for _ in range(len(bomb)):
+            stack.pop()
+    
+if stack:
+    print(''.join(stack))
+else:
+    print("FRULA")
