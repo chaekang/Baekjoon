@@ -3,10 +3,10 @@
 
 using namespace std;
 
-int arr[101][101]; // 1 뱀 2 사과
+int arr[101][101];
 int N, K, L;
 int ans;
-int dir_idx = 1; // 방향 상우하좌
+int dir_idx = 1;
 int dx[4] = { 0, 1, 0, -1 };
 int dy[4] = { -1, 0, 1, 0 };
 
