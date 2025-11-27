@@ -1,61 +1,62 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
+#include<iostream>
+#include<vector>
+#include<algorithm>
 using namespace std;
 
-typedef long long ll;
-
 int main() {
-	int n;
-	cin >> n;
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 
-	vector<int> request(n);
-	ll sum = 0;
-	ll ans = 0;
+	int N = 0; // 지방의 수
+	int money = 0; // 배정된 예산
+	int max = 0; // 총 예산
+	
+	int answer = 0; // 답
 
-	for (int i = 0; i < n; i++) {
-		cin >> request[i];
-		sum += request[i];
+	cin >> N;
+
+	vector<int> v;
+
+	// 각 지방의 예산요청 입력 받기
+	for (int i{ 0 }; i < N; i++) {
+		cin >> money;
+		v.push_back(money);
 	}
-	sort(request.begin(), request.end());
 
-	ll m;
-	cin >> m;
+	cin >> max;
 
-	if (sum <= m) {
-		ans = request[n - 1];
-	}
-	else {
-		ll start = 0;
-		ll end = request[n - 1];
+	sort(v.begin(), v.end());
 
-		while (start <= end) {
-			ll mid = (start + end) / 2;
-			sum = 0;
+	int start = 1; 
+	int end = v.back();
 
-			for (int i = 0; i < n; i++) {
-				if (request[i] <= mid) {
-					sum += request[i];
-				}
-				else {
-					sum += mid;
-				}
-			}
 
-			if (sum < m) {
-				start = mid + 1;
-				ans = mid;
-			}
-			else if (sum > m) {
-				end = mid - 1;
+	while (start <= end) {
+		int mid = (start + end) / 2;
+		int sum = 0;
+
+		for (int i{ 0 }; i < v.size(); i++ ) {
+			if (v[i] <= mid) {
+				sum += v[i];
 			}
 			else {
-				ans = mid;
-				break;
+				sum += mid;
 			}
+		}
+
+		// 예산을 초과하는 경우
+		if (sum > max) {
+			end = mid - 1;
+		}
+
+		// 예산을 초과하지 않는 경우
+		else {
+			if (mid <= end) {
+				answer = mid;
+			}
+			start = mid + 1;
 		}
 	}
 
-	cout << ans;
+	cout << answer;
 }
