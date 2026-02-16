@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int I, n;
+int m, n;
 vector<vector<int>> v;
 vector<vector<bool>> visited;
 pair<int, int> now;
@@ -41,8 +41,8 @@ void BFS(int xx, int yy) {
 }
 
 int main() {
-	cin >> I;
-	for (int i = 0; i < I; i++) {
+	cin >> m;
+	for (int i = 0; i < m; i++) {
 		cin >> n;
 		v.clear();
 		visited.clear();
