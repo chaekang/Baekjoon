@@ -1,29 +1,33 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-using namespace std;	
 
-int main() {
-	int T;
-	cin >> T;
+using namespace std;
 
-	while (T--) {
-		int N;
-		cin >> N;
+int main()
+{
+	int t;
+	cin >> t;
 
-		vector <int> v(N);
+	while (t--)
+	{
+		int n;
+		cin >> n;
+		vector<int> v(n);
 
-		for (int i = 0; i < N; i++) cin >> v[i];
+		for (int i = 0; i < n; i++)
+		{
+			cin >> v[i];
+		}
 
 		sort(v.begin(), v.end());
 
-		int result = 0;
-		result = max(result, v[1] - v[0]);
-		result = max(result, v[N - 1] - v[N - 2]);
-
-		for (int i = 0; i < N - 2; i++) {
-			result = max(result, v[i + 2] - v[i]);
+		int ans = 0;
+		for (int i = 0; i < n - 2; i++)
+		{
+			ans = max(ans, v[i + 2] - v[i]);
 		}
-		cout << result << '\n';
+
+		cout << ans << "\n";
 	}
 }
