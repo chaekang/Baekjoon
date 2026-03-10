@@ -2,18 +2,30 @@
 
 using namespace std;
 
-int main() {
+int main()
+{
 	int n;
 	cin >> n;
 
-	int DP[1001];
+	int dp[1001];
 
-	DP[1] = 1;
-	DP[2] = 2;
+	dp[0] = 0;
+	dp[1] = 1;
+	dp[2] = 2;
+	//dp[3] = 3;
+	//dp[4] = 5;
+	//dp[5] = 8;
 
-	for (int i = 3; i <= n; i++) {
-		DP[i] = (DP[i - 1] + DP[i - 2]) % 10007;
+	if (n <= 2)
+	{
+		cout << dp[n];
+		return 0;
 	}
 
-	cout << DP[n];
+	for (int i = 3; i <= n; i++)
+	{
+		dp[i] = (dp[i - 1] + dp[i - 2]) % 10007;
+	}
+
+	cout << dp[n];
 }
