@@ -1,39 +1,47 @@
-import sys
+# 링크드리스트 - 에디터 (백준 실버2)
+# 문제 링크: https://www.acmicpc.net/problem/1406
+
 from collections import deque
 
-string = deque(list(sys.stdin.readline().strip()))
-M = int(sys.stdin.readline())
+if __name__ == "__main__":
+    string = input()
+    dq=deque(string)
 
-count = 0
-cursor = len(string)
+    n = int(input())
+    str=list()
+    for _ in range(n):
+        x = input()
+        str.append(x)
 
-for i in range(M):
-    order = sys.stdin.readline().strip()
-    ch = order.split()
-    
-    if ch[0] == "L":
-        if cursor == 0:
-            continue
+    cursor = len(dq)
+    count = 0
+
+    for s in str:
+        arr = list(s.split())
+        if arr[0] == 'L':
+            if cursor == 0:
+                continue
+            else:
+                cursor -= 1
+                count -= 1
+                dq.rotate(1)
+        elif arr[0] == "D":
+            if cursor == len(dq):
+                continue
+            else:
+                cursor += 1
+                count += 1
+                dq.rotate(-1)
+        elif arr[0] == "B":
+            if cursor == 0:
+                continue
+            else:
+                dq.pop()
+                cursor -= 1
         else:
-            string.rotate(1)
-            count += 1
-            cursor -= 1
-    elif ch[0] == "D":
-        if cursor == len(string):
-            continue
-        else:
-            string.rotate(-1)
-            count -= 1
+            dq.append(arr[1])
             cursor += 1
-    elif ch[0] == "B":
-        if cursor == 0:
-            continue
-        else:
-            string.pop()
-            cursor -= 1
-    elif ch[0] == "P":
-        string.append(ch[1])
-        cursor += 1
+    
+    dq.rotate(count)
 
-string.rotate(-count)   
-print(''.join(string))
+    print(''.join(dq))
