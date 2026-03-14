@@ -1,25 +1,31 @@
-import sys
+# 이분탐색 - 수 찾기 (백준 실버4)
+# 문제 링크: https://www.acmicpc.net/problem/1920
 
-N = int(sys.stdin.readline())
-A_arr = list(map(int, sys.stdin.readline().split()))
-M = int(sys.stdin.readline())
-M_arr = list(map(int, sys.stdin.readline().split()))
+def binary_search(arr, target):
+    left = 0
+    right = len(arr) - 1
 
-A_arr.sort()
-for target in M_arr:
-    start, end = 0, N - 1
-    is_Exist = False
-    
-    while start <= end:
-        mid = (start + end) // 2
-        
-        if A_arr[mid] == target:
-            is_Exist = True
-            print(1)
-            break
-        elif A_arr[mid] < target:
-            start = mid + 1
+    while (left <= right):
+        mid = (left + right) // 2
+        if (arr[mid] == target):
+            return True
+        elif (arr[mid] < target):
+            left = mid + 1
         else:
-            end = mid - 1
-    if not is_Exist:
-        print(0)
+            right = mid - 1
+    return False
+
+if __name__ == "__main__":
+    n = int(input())
+    arr=list(map(int, input().split()))
+
+    m_num = int(input())
+    m = list(list(map(int, input().split())))
+
+    arr.sort()
+
+    for i in m:
+        if (binary_search(arr, i)):
+            print(1)
+        else:
+            print(0)
