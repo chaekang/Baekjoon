@@ -3,10 +3,10 @@
 
 def binary_search(arr, target):
     left = 0
-    right = len(arr) - 1
+    right = len(arr)-1
 
     while (left <= right):
-        mid = (left + right) // 2
+        mid = (left+right) // 2
         if (arr[mid] == target):
             return True
         elif (arr[mid] < target):
@@ -17,15 +17,14 @@ def binary_search(arr, target):
 
 if __name__ == "__main__":
     n = int(input())
-    arr=list(map(int, input().split()))
+    a = list(map(int, input().split()))
+    a.sort()
 
-    m_num = int(input())
-    m = list(list(map(int, input().split())))
+    m = int(input())
+    m_list = list(map(int, input().split()))
 
-    arr.sort()
-
-    for i in m:
-        if (binary_search(arr, i)):
+    for i in m_list:
+        if (binary_search(a, i)):
             print(1)
         else:
             print(0)
