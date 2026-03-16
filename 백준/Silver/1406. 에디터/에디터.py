@@ -5,42 +5,44 @@ from collections import deque
 
 if __name__ == "__main__":
     string = input()
-    dq=deque(string)
 
     n = int(input())
-    str=list()
+    s = list()
     for _ in range(n):
         x = input()
-        str.append(x)
+        s.append(x)
 
-    cursor = len(dq)
+    dq = deque(string)
+
     count = 0
+    cursor = len(dq)
 
-    for s in str:
-        arr = list(s.split())
-        if arr[0] == 'L':
+    for i in range(n):
+        command = list(s[i].split())
+
+        if (command[0] == 'L'):
             if cursor == 0:
                 continue
             else:
+                dq.rotate(1)
                 cursor -= 1
                 count -= 1
-                dq.rotate(1)
-        elif arr[0] == "D":
+        elif (command[0] == 'D'):
             if cursor == len(dq):
                 continue
             else:
+                dq.rotate(-1)
                 cursor += 1
                 count += 1
-                dq.rotate(-1)
-        elif arr[0] == "B":
+        elif (command[0] == "B"):
             if cursor == 0:
                 continue
             else:
                 dq.pop()
                 cursor -= 1
         else:
-            dq.append(arr[1])
-            cursor += 1
+            dq.append(command[1])
+            cursor +=1
     
     dq.rotate(count)
 
