@@ -4,9 +4,10 @@
 if __name__ == "__main__":
     n, m = map(int, input().split())
 
-    last = n - m
-    for i in range(last):
-        print(f"{i} {i+1}")
+    last = n-m
 
-    for i in range(last + 1, n):
-        print(f"{last} {i}")
+    for i in range(last+1):
+        print(f"{i} {i+1}")
+    
+    for i in range(last + 1, n - 1):
+        print(f"{last} {i+1}")
