@@ -3,37 +3,32 @@
 
 from collections import deque
 
-def bfs(graph, x, visited):
-    cnt=0
+def bfs(graph, start, visited):
     q = deque()
-    q.append(x)
-    visited[x] = True
+    q.append(start)
+    visited[start] = True
+    ans = 0
 
     while q:
-        p = q.pop()
-        for i in range(len(graph[p])):
-            v = graph[p][i]
-            if visited[v]:
+        x = q.popleft()
+        for i in range(len(graph[x])):
+            cur = graph[x][i]
+            if visited[cur]:
                 continue
-
-            q.append(v)
-            visited[v]=True
-            cnt += 1
-    
-    return cnt
+            q.append(cur)
+            visited[cur]=True
+            ans += 1
+    return ans
 
 if __name__ == "__main__":
-    v = int(input())
-    e = int(input())
+    c = int(input())
+    n = int(input())
+    arr = {i:[] for i in range(c + 1)}
 
-    graph = {i: [] for i in range(v+1)}
+    for i in range(n):
+        u, v = map(int, input().split())
+        arr[u].append(v)
+        arr[v].append(u)
 
-    for _ in range(e):
-        u, m = map(int, input().split())
-        graph[u].append(m)
-        graph[m].append(u)
-
-    visited = [False] * (v+1)
-
-    print(bfs(graph, 1, visited))
-
+    visited = [False] * (c+1)
+    print(bfs(arr, 1, visited))
