@@ -3,31 +3,40 @@
 
 using namespace std;
 
-int main() {
+int main()
+{
 	string formula;
 	cin >> formula;
 
-	bool isMinus = false;
-	string num;
 	int ans = 0;
+	int tmp = 0;
+	string num = "";
+	bool isMinus = false;
+	for (int i = 0; i <= formula.size(); i++)
+	{
+		if (formula[i] == '-' || formula[i] == '+' || i == formula.size())
+		{
+			tmp += stoi(num);
+			num = "";
 
-	for (int i = 0; i <= formula.size(); i++) {
-		if (formula[i] == '+' || formula[i] == '-' || i == formula.size()) {
-			if (isMinus) {
-				ans -= stoi(num);
-				num = "";
+			if (formula[i] == '-' || i == formula.size())
+			{
+				if (isMinus)
+				{
+					ans -= tmp;
+				}
+				else
+				{
+					ans += tmp;
+				}
+				tmp = 0;
+				isMinus = true;
 			}
-			else {
-				ans += stoi(num);
-				num = "";
-			}
+
 		}
-		else {
+		else
+		{
 			num += formula[i];
-		}
-
-		if (formula[i] == '-') {
-			isMinus = true;
 		}
 	}
 
