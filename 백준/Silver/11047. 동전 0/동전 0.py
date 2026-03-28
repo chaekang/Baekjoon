@@ -3,18 +3,16 @@
 
 if __name__ == "__main__":
     n, k = map(int, input().split())
-
-    arr = [0]*n
-
+    arr=list()
     for i in range(n):
-        arr[i]=int(input())
+        arr.append(int(input()))
 
     arr.sort(reverse=True)
-    
-    count = 0
-    for i in range(len(arr)):
-        used = k//arr[i]
-        count += used
-        k %= arr[i]
 
-    print(count)
+    ans=0
+    for a in arr:
+        used = k // a
+        ans += used
+        k %= a
+
+    print(ans)
