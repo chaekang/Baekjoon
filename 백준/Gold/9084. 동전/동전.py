@@ -3,16 +3,19 @@
 
 if __name__ == "__main__":
     t = int(input())
+
     for _ in range(t):
         n = int(input())
-        arr = list(map(int, input().split()))
+        arr= list(map(int, input().split()))
+
         m = int(input())
 
-        dp = [0] * (m+1)
-        dp[0] = 1
+        dp = [0]*(m+1)
+
+        dp[0]=1
 
         for a in arr:
             for i in range(a, m+1):
-                dp[i] += dp[i-a]
+                dp[i]+=dp[i-a]
 
         print(dp[m])
