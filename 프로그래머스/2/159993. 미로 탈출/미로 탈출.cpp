@@ -4,10 +4,10 @@
 
 using namespace std;
 
-int dx[4] = {1, 0, -1, 0};
-int dy[4] = {0, 1, 0, -1};
+int dx[4] = { 1, 0, -1, 0 };
+int dy[4] = { 0, 1, 0, -1 };
 
-int BFS(int xx, int yy, char target, vector<string> &maps) {
+int BFS(int xx, int yy, char target, const vector<string> &maps) {
     queue<pair<int, int>> q;
     vector<vector<int>> dist(maps.size(), vector<int>(maps[0].size(), -1));
     
@@ -27,15 +27,12 @@ int BFS(int xx, int yy, char target, vector<string> &maps) {
             int nx = x + dx[i];
             int ny = y + dy[i];
             
-            if (nx < 0 || ny < 0 || nx >= maps.size() || 
-                ny >= maps[0].size() || maps[nx][ny] == 'X') {
+            if (nx < 0 || ny < 0 || nx >= maps.size() || ny >= maps[0].size() || maps[nx][ny] == 'X' || dist[nx][ny] != -1) {
                 continue;
             }
             
-            if (dist[nx][ny] == -1) {
-                q.push({nx, ny});
-                dist[nx][ny] = dist[x][y] + 1;
-            }
+            q.push({nx, ny});
+            dist[nx][ny] = dist[x][y] + 1;
         }
     }
     
@@ -47,9 +44,8 @@ int solution(vector<string> maps) {
     
     int x = 0;
     int y = 0;
-    
     for (int i=0; i<maps.size(); i++) {
-        for (int j = 0; j<maps[0].size(); j++) {
+        for (int j=0; j<maps[0].size(); j++) {
             if (maps[i][j] == 'S') {
                 x = i;
                 y = j;
@@ -57,13 +53,13 @@ int solution(vector<string> maps) {
         }
     }
     
-    int tmp = BFS(x, y, 'L', maps);
-    if (tmp == -1) {
+    int tmp1 = BFS(x, y, 'L', maps);
+    if (tmp1 == -1) {
         return -1;
     }
     
     for (int i=0; i<maps.size(); i++) {
-        for (int j = 0; j<maps[0].size(); j++) {
+        for (int j=0; j<maps[0].size(); j++) {
             if (maps[i][j] == 'L') {
                 x = i;
                 y = j;
@@ -71,11 +67,12 @@ int solution(vector<string> maps) {
         }
     }
     
-    int tmp1 = BFS(x, y, 'E', maps);
-    if (tmp1 == -1) {
+    int tmp2 = BFS(x, y, 'E', maps);
+    if (tmp2 == -1) {
         return -1;
     }
-    answer = tmp + tmp1;
+    
+    answer = tmp1 + tmp2;
     
     return answer;
 }
