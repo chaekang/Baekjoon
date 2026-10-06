@@ -1,30 +1,39 @@
-#include <string>
 #include <vector>
 #include <algorithm>
 
 using namespace std;
 
 int solution(vector<int> people, int limit) {
-    int answer = 0;
     sort(people.begin(), people.end());
+
     int left = 0;
     int right = people.size() - 1;
-    
+    int answer = 0;
+
     while (left <= right) {
-        int twoPeople = 2;
-        answer++;
-        int leftLimit = limit;
-        while (leftLimit - people[right] >= 0 && twoPeople > 0) {
-            leftLimit -= people[right];
+        int tmpLimit = limit;
+        int two = 2;
+
+        while (left <= right &&
+               tmpLimit - people[right] >= 0 &&
+               two > 0) {
+
+            tmpLimit -= people[right];
             right--;
-            twoPeople--;
+            two--;
         }
-        while (leftLimit - people[left] >= 0 && twoPeople > 0) {
-            leftLimit -= people[left];
+
+        while (left <= right &&
+               tmpLimit - people[left] >= 0 &&
+               two > 0) {
+
+            tmpLimit -= people[left];
             left++;
-            twoPeople--;
+            two--;
         }
+
+        answer++;
     }
-    
+
     return answer;
 }
